@@ -56,9 +56,9 @@ const init = async()=> {
     await conn.sync({ force: true });
     await Promise.all([
       Task.create({ name: 'clean clost', complete: true }),
-      Task.create({ name: 'study react', complete: true }),
-      Task.create({ name: 'buy milk'}),
-      Task.create({ name: 'do laundry'}),
+      Task.create({ name: 'study react', complete: true, difficulty: 'DIFFICULT' }),
+      Task.create({ name: 'buy milk', description: 'ONLY ALMOND MILK'}),
+      Task.create({ name: 'do laundry', description: 'wash all sport clothes'}),
     ]);
   //sync database and seed data here
   app.listen(port, ()=> console.log(`listening on port ${port}`));

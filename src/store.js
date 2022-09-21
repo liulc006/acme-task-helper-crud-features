@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import axios from 'axios';
 import logger from 'redux-logger';
+import { Navigate } from 'react-router-dom';
 
 const tasks = (state = [], action)=> {
   if(action.type === 'SET_TASKS'){
@@ -32,24 +33,27 @@ export const fetchTasks = ()=> {
   };
 };
 
-export const updateTask = (task)=> {
+export const updateTask = (task, navigate)=> {
   return async(dispatch)=> {
     const response = await axios.put(`/api/tasks/${task.id}`, task);
     dispatch({ type: 'UPDATE_TASK', task: response.data });
+    navigate('/');
   };
 };
 
-export const destroyTask = (task)=> {
+export const destroyTask = (task, navigate)=> {
   return async(dispatch)=> {
     await axios.delete(`/api/tasks/${task.id}`);
     dispatch({ type: 'DESTROY_TASK', task });
+    navigate('/')
   };
 };
 
-export const createTask = (task)=> {
+export const createTask = (task, navigate)=> {
   return async(dispatch)=> {
     const response = await axios.post('/api/tasks', task);
     dispatch({ type: 'CREATE_TASK', task: response.data });
+    navigate(`/tasks/${response.data.id}`);
   };
 };
 

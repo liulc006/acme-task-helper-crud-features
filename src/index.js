@@ -17,6 +17,7 @@ const App = ()=> {
       <Routes>
         <Route path='/' element={ <Tasks /> } />
         <Route path='/tasks/:id' element={ <Tasks /> } />
+        <Route path='/tasks/filter/:difficulty' element={<Tasks />}/>
       </Routes>
       
     </div>
